@@ -29,20 +29,35 @@ class _HomepageState extends State<Homepage> {
     List<String> longestName=(yourName.length>loverName.length?yourName:loverName).toLowerCase().split("");
     List<String> smallestName=(yourName.length<loverName.length?yourName:loverName).toLowerCase().split("");
     final local=[...longestName];
-    for(var i in local){
-      if(smallestName.contains(i))
-      {
-        smallestName.remove(i);
-        longestName.remove(i);
-      }
+    String ans="";
+    if(yourName.length==0 && loverName.length==0)
+    {
+      ans="Enter Both Your Name And Your Lover Name";
     }
-    List<String> flames=["Frients","Lovers","Admirers","Marriage","Enemies", "Secret Lovers"];
-    final length=smallestName.length+longestName.length;
-    String ans=ansewer(flames, length);
+    else if(yourName.length==0)
+    {
+      ans="Enter Your Name";
+    }
+    else if(loverName.length==0)
+    {
+      ans="Enter Your Lover Name";
+    }
+    else{
+      for(var i in local){
+        if(smallestName.contains(i))
+        {
+          smallestName.remove(i);
+          longestName.remove(i);
+        }
+      }
+      List<String> flames=["Friends","Lovers","Admirers","Marriage","Enemies", "Secret Lovers"];
+      final length=smallestName.length+longestName.length;
+      ans=ansewer(flames, length);
+    }
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: const Text('Your relationship'),
+          title: const Text('Your Relationship'),
           content: Text(ans),
           actions: <Widget>[
             TextButton(
